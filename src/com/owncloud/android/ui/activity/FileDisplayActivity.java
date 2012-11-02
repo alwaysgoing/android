@@ -138,6 +138,8 @@ public class FileDisplayActivity extends SherlockFragmentActivity implements
         if(savedInstanceState != null) {
             // TODO - test if savedInstanceState should take precedence over file in the intent ALWAYS (now), NEVER, or SOME TIMES
             mCurrentDir = savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
+        } else if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {
+            mCurrentDir = getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
         }
         
         if (!AccountUtils.accountsAreSetup(this)) {
@@ -298,6 +300,10 @@ public class FileDisplayActivity extends SherlockFragmentActivity implements
                 showDialog(DIALOG_ABOUT_APP);
                 break;
             }
+            case R.id.search: {
+                onSearchRequested();
+                break;
+            }
             case android.R.id.home: {
                 if(mCurrentDir != null && mCurrentDir.getParentId() != 0){
                     onBackPressed(); 
@@ -305,7 +311,7 @@ public class FileDisplayActivity extends SherlockFragmentActivity implements
                 break;
             }
             default:
-                retval = false;
+                retval = super.onOptionsItemSelected(item);
         }
         return retval;
     }

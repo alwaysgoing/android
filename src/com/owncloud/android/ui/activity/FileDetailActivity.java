@@ -59,11 +59,15 @@ public class FileDetailActivity extends SherlockFragmentActivity implements File
     private FileDownloaderBinder mDownloaderBinder = null;
     private ServiceConnection mDownloadConnection, mUploadConnection = null;
     private FileUploaderBinder mUploaderBinder = null;
+    
+    public static final String ACTION_DISPLAY_FILE = "org.owncloud.android.files.display_file";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        Log.e("QWE", getIntent().getAction()+" -- ");
 
         // check if configuration changed to large-land ; for a tablet being changed from portrait to landscape when in FileDetailActivity 
         Configuration conf = getResources().getConfiguration();

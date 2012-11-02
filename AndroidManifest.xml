@@ -53,6 +53,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data android:name="android.app.default_searchable"
+                   android:value=".files.SearchableActivity" />
         </activity>
         <activity android:name=".ui.activity.UploadFilesActivity">
         </activity>
@@ -116,6 +118,14 @@
             android:label="@string/sync_string_files"
             android:syncable="true" >
         </provider>
+        <provider
+            android:name=".files.SearchSuggestion"
+            android:authorities="com.owncloud.android.files.SearchSuggestion"
+            android:searchMode="showSearchLabelAsBadge"
+            android:searchSettingsDescription="suggests symbols"
+            android:queryAfterZeroResults="true"
+            android:searchSuggestSelection=" ? "
+            android:searchSuggestIntentAction="android.intent.action.VIEW"/>
 
         <activity
             android:name=".ui.activity.AuthenticatorActivity"
@@ -126,12 +136,19 @@
         <service android:name=".files.services.FileDownloader" >
         </service>
 
-        <activity android:name=".ui.activity.FileDetailActivity" />
+        <activity android:name=".ui.activity.FileDetailActivity"/>
         <activity android:name=".ui.activity.PinCodeActivity" />
         <activity android:name=".extensions.ExtensionsAvailableActivity"></activity>
         <activity android:name=".extensions.ExtensionsListActivity"></activity>
         <activity android:name=".ui.activity.AccountSelectActivity" android:uiOptions="none" android:label="@string/prefs_accounts"></activity>
         <activity android:name=".ui.activity.ConflictsResolveActivity"/>
+        <activity android:name=".files.SearchableActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                   android:resource="@xml/searchable"/>
+        </activity>
             
         <service android:name=".files.services.FileUploader" >
         </service>

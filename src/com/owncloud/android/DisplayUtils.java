@@ -114,4 +114,13 @@ public class DisplayUtils {
         Date date = new Date(milliseconds);
         return date.toLocaleString();
     }
+
+    public static int mimetypeToResourceID(String mimetype) {
+        if (mimetype.equals("DIR")) {
+            return R.drawable.folder;
+        }
+        // TODO(bprzybylski): add more mimetypes with icons
+        
+        return R.drawable.file;
+    }
 }
